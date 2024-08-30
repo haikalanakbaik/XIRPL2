@@ -346,8 +346,9 @@ li a:hover {
     display: inline-block;
   }
   .fotosmk5 {
-    width: 115px;
-    height: 115px;
+    width: 100px;
+    height: 100px;
+    padding: 0px;
     margin: 150px 0px 0px 0px;
   }
   .tentangsmk5 {
@@ -363,8 +364,10 @@ li a:hover {
     padding: 0px 10px 0px 20px;
   }
   .fotopr{
-    width: 350px;
-    height: 250px;
+    margin: 0px 0px 0px 20px ;
+    padding: 0px;
+    width: 300px;
+    height: 200px;
   }
   .deskpr {
     padding: 0px 10px 0px 20px;
@@ -374,16 +377,23 @@ li a:hover {
     display: inline-block;
     margin-left: 20px;
   }
-  .ig {
+  .ig, .tt, .yt {
     margin-left: 15%;
     width: 70%;
   }
-  .tt {
-    margin-left: 15%;
-    width: 70%;
+  .ig p, .tt p, .yt p {
+    font-size: 30px;
   }
-  .yt {
-    margin-left: 15%;
-    width: 70%;
+  .ig img {
+    width: 50px;
+    height: 50px;
+  }
+  .tt img {
+    width: 40px;
+    height: 40px;
+  }
+  .yt img {
+    width: 45px;
+    height: 35px;
   }
 }
