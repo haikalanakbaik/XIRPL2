@@ -149,11 +149,13 @@ li a:hover {
   margin-top: auto;
   background: #1a2238;
   color: #ffffff;
+  
 }
 
 .COMINGSOON {
   text-align: center;
   padding-top: 40vh;
+  padding-bottom: 40vh;
   font-size: 5vh;
   background-image: linear-gradient(
     45deg,
@@ -326,7 +328,7 @@ li a:hover {
   color: #e5f5f9;
 }
 
-@media screen and (max-width: 991.98px) {
+@media screen and (max-width: 1080px) {
   .tentangrpl {
     display: block;
   }
@@ -344,38 +346,44 @@ li a:hover {
     display: inline-block;
   }
   .fotosmk5 {
-    width: 200px;
-    height: 200px;
-    margin-top: 100px;
+    width: 115px;
+    height: 115px;
+    margin: 150px 0px 0px 0px;
   }
   .tentangsmk5 {
     display: inline-flex;
+  }
+  .desksmk5{
+    font-size: 20px;
   }
   .tentangpr {
     display: contents;
   }
   .judulpr {
-    font-size: 35px;
-    padding: 0px 10px;
+    padding: 0px 10px 0px 20px;
+  }
+  .fotopr{
+    width: 350px;
+    height: 250px;
   }
   .deskpr {
-    padding: 0px 10px;
+    padding: 0px 10px 0px 20px;
     font-size: 18px;
   }
   .tbl-tujuan-pr {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 20px;
   }
   .ig {
-    margin-left: 25%;
-    width: 50%;
+    margin-left: 15%;
+    width: 70%;
   }
   .tt {
-    margin-left: 25%;
-    width: 50%;
+    margin-left: 15%;
+    width: 70%;
   }
   .yt {
-    margin-left: 25%;
-    width: 50%;
+    margin-left: 15%;
+    width: 70%;
   }
 }
