@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+  </head>
+  <body>
+    <style>
+ /* Galeri Gambar */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.gallery-item {
+    width: calc(33.333% - 30px);
+    position: relative;
+    cursor: pointer;
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Bayangan lebih besar untuk kesan foto diangkat */
+    border: 8px solid #A0522D; /* Warna kayu untuk bingkai foto */
+    border-radius: 12px; /* Sudut bingkai melengkung */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+    border: 2px solid #fff; /* Pinggiran putih di dalam bingkai */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan dalam untuk memberi kedalaman */
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Sedikit membesar saat hover */
+}
+
+.gallery-image:hover {
+    transform: scale(1.1);  /* Efek zoom-in saat hover pada gambar */
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999;
+}
+
+.lightbox-content {
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+.lightbox-slide {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    font-size: 30px;
+    color: white;
+    transform: translateY(-50%);
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-item {
+        width: calc(50% - 30px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .gallery-item {
+        width: 100%;
+    }
+}
+
+    </style>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img
+          src="medsos/anraiba.png"
+          alt="Image 1"
+          onclick="openLightbox();currentSlide(1)"
+          class="gallery-image"
+        />
+      </div>
+      <div class="gallery-item">
+        <img
+          src="image2.jpg"
+          alt="Image 2"
+          onclick="openLightbox();currentSlide(2)"
+          class="gallery-image"
+        />
+      </div>
+      <div class="gallery-item">
+        <img
+          src="image3.jpg"
+          alt="Image 3"
+          onclick="openLightbox();currentSlide(3)"
+          class="gallery-image"
+        />
+      </div>
+      <!-- Tambahkan lebih banyak gambar sesuai kebutuhan -->
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <span class="close" onclick="closeLightbox()">&times;</span>
+      <div class="lightbox-content">
+        <img src="medsos/anraiba.png" id="img1" class="lightbox-slide" />
+        <img src="image2.jpg" id="img2" class="lightbox-slide" />
+        <img src="image3.jpg" id="img3" class="lightbox-slide" />
+      </div>
+      <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+      <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+
+    <script>
+      let slideIndex = 1;
+
+      function openLightbox() {
+        document.getElementById("lightbox").style.display = "block";
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox").style.display = "none";
+      }
+
+      function changeSlide(n) {
+        showSlide((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlide((slideIndex = n));
+      }
+
+      function showSlide(n) {
+        let slides = document.getElementsByClassName("lightbox-slide");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+      }
+    </script>
+  </body>
+</html>
