@@ -190,61 +190,12 @@
         <div class="message nama-aku"><h1>Avandy</h1>ANGGOTA</div>
         <!-- <div class="message pesan-aku">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit iure laboriosam quos odit. Error id placeat sed ipsum totam ad!</div> -->
     </div> 
+</div>
     <div class="struktur">
         <img src="medsos/Ailul Fikri (3).png" alt="">
     </div>
 
 
-</div>
-  <div class="container">
-    <h1>Pesan Anonim</h1>
-    <form id="pesanForm">
-      <textarea id="pesanInput" placeholder="Tulis pesan anonimmu di sini..." required></textarea>
-      <button type="submit">Kirim</button>
-    </form>
-    <div id="daftarPesan">
-      <h2>Pesan Masuk</h2>
-      <ul id="pesanList"></ul>
-    </div>
-  </div>
-
-<script>
- // Ambil elemen-elemen dari DOM
-const form = document.getElementById("pesanForm");
-const pesanInput = document.getElementById("pesanInput");
-const pesanList = document.getElementById("pesanList");
-
-// Muat pesan dari localStorage saat halaman dimuat
-window.addEventListener("DOMContentLoaded", () => {
-  const pesanTersimpan = JSON.parse(localStorage.getItem("pesanAnonim")) || [];
-  pesanTersimpan.reverse().forEach(pesan => {
-    tambahPesanKeList(pesan);
-  });
-});
-
-// Fungsi untuk menambahkan pesan ke DOM
-function tambahPesanKeList(pesan) {
-  const li = document.createElement("li");
-  li.textContent = pesan;
-  pesanList.prepend(li);
-}
-
-// Saat form disubmit
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const pesan = pesanInput.value.trim();
-  if (pesan !== "") {
-    tambahPesanKeList(pesan);
-
-    // Simpan ke localStorage
-    const pesanTersimpan = JSON.parse(localStorage.getItem("pesanAnonim")) || [];
-    pesanTersimpan.push(pesan);
-    localStorage.setItem("pesanAnonim", JSON.stringify(pesanTersimpan));
-
-    pesanInput.value = "";
-  }
-});
 
 </script>
     <div class="copyright">
