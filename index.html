@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XI RPL 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes zoom {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .marquee {
+        animation: marquee 20s linear infinite;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+      .slide-in-left {
+        animation: slideInLeft 0.6s ease-out forwards;
+      }
+      .slide-in-right {
+        animation: slideInRight 0.6s ease-out forwards;
+      }
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow: auto;
+      }
+      .lightbox.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        animation: zoom 0.3s;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .close-btn:hover {
+        color: #ff6a3d;
+      }
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 10px 20px;
+        background-color: rgba(255, 106, 61, 0.5);
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+      .nav-btn:hover {
+        background-color: rgba(255, 106, 61, 0.9);
+      }
+      .prev-btn {
+        left: 20px;
+      }
+      .next-btn {
+        right: 20px;
+      }
+
+      .section {
+        opacity: 0;
+      }
+      .section.visible {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body class="bg-[#040a18] text-white overflow-x-hidden">
+    <!-- Navbar -->
+    <header
+      class="bg-[#1a2238] px-4 sm:px-6 py-6 sm:py-10 flex flex-wrap items-center justify-between sticky top-0 z-50 shadow-lg"
+    >
+      <h1
+        class="text-xl sm:text-2xl md:text-3xl font-bold text-white hover:text-[#ff6a3d] transition-all duration-500 hover:rotate-3 cursor-pointer ml-2 sm:ml-5"
+      >
+        XI RPL 2
+      </h1>
+
+      <nav class="order-3 md:order-2 w-full md:w-auto mt-4 md:mt-0">
+        <ul class="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-2">
+          <li>
+            <a
+              href="#profil"
+              class="text-sm sm:text-base text-white hover:text-[#ff6a3d] hover:underline transition-all duration-300 px-2 sm:px-4 py-2 rounded"
+              >PROFIL</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tentang"
+              class="text-sm sm:text-base text-white hover:text-[#ff6a3d] hover:underline transition-all duration-300 px-2 sm:px-4 py-2 rounded"
+              >TENTANG</a
+            >
+          </li>
+          <li>
+            <a
+              href="#galeri"
+              class="text-sm sm:text-base text-white hover:text-[#ff6a3d] hover:underline transition-all duration-300 px-2 sm:px-4 py-2 rounded"
+              >GALERI</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <a
+        class="order-2 md:order-3 bg-[#ff6a3d] text-white text-sm sm:text-base px-4 sm:px-6 py-2 rounded-lg hover:rotate-6 transition-transform duration-300 mr-2 sm:mr-5"
+        href="medsos.html"
+        >KUNJUNGI</a
+      >
+    </header>
+
+    <!-- PROFIL SECTION -->
+    <section
+      id="profil"
+      class="relative bg-[url('foto_kelas/lan3.jpg')] bg-cover bg-center bg-no-repeat min-h-screen"
+    >
+      <div
+        class="absolute inset-0 bg-slate-900/40 flex items-center justify-center"
+      >
+        <h1
+          class="text-center text-white text-3xl sm:text-4xl md:text-6xl font-bold max-w-3xl px-4 sm:px-6 fade-in"
+        >
+          Welcome to XI RPL 2
+        </h1>
+      </div>
+    </section>
+
+    <!-- Marquee Title -->
+    <div class="relative z-10 overflow-hidden py-8 sm:py-12">
+      <h1
+        class="marquee text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white whitespace-nowrap text-center"
+      >
+        SELAMAT DATANG DI WEBSITE KELAS XI RPL 2
+      </h1>
+    </div>
+
+    <!-- Members Section -->
+    <div class="container mx-auto px-20 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+        <!-- Ailul - Ketua -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/ailul.jpg"
+            alt="Ailul"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Ailul</h2>
+            <p class="text-gray-600">KETUA KELAS</p>
+          </div>
+        </div>
+
+        <!-- Zulfa - Wakil -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/zulfa.jpg"
+            alt="Zulfa"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Zulfa</h2>
+            <p class="text-gray-600">WAKIL KETUA</p>
+          </div>
+        </div>
+
+        <!-- Raif - Keamanan -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/raif.jpg"
+            alt="Raif"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Raif</h2>
+            <p class="text-gray-600">KEAMANAN</p>
+          </div>
+        </div>
+
+        <!-- Nabil AL - Keagamaan -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/nabil.jpg"
+            alt="Nabil AL"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Nabil AL</h2>
+            <p class="text-gray-600">KEAGAMAAN</p>
+          </div>
+        </div>
+
+        <!-- Syarif - Kebersihan -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/pudin.jpg"
+            alt="Syarif"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Syarif</h2>
+            <p class="text-gray-600">KEBERSIHAN</p>
+          </div>
+        </div>
+
+        <!-- Sayyidah - Sekretaris -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/sayyidah.jpg"
+            alt="Sayyidah"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Sayyidah</h2>
+            <p class="text-gray-600">SEKRETARIS</p>
+          </div>
+        </div>
+
+        <!-- Keisya - Bendahara -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/keisya.jpg"
+            alt="Keisya"
+            class="w-24 h-24 rounded-full mr-5 object-cover"
+          />
+          <div class="text-left">
+            <h2 class="text-2xl font-bold text-gray-800">Keisya</h2>
+            <p class="text-gray-600">BENDAHARA</p>
+          </div>
+        </div>
+
+        <!-- Anggota Members -->
+        <!-- Ruzain -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/ruzain.jpg"
+            alt="Ruzain"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Ruzain</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Qaikhal -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/hycal.jpg"
+            alt="Qaikhal"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Qaikhal</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Daffa -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/daffa.jpg"
+            alt="Daffa"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Daffa</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Kausar -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/kausar.jpg"
+            alt="Kausar"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Kausar</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Jadid -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/jadid.jpg"
+            alt="Jadid"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Jadid</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Azra -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/azra.jpg"
+            alt="Azra"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Azra</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Fakhri -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/fakhri.jpg"
+            alt="Fakhri"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Fakhri</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Nabil R -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/nabilr.jpg"
+            alt="Nabil R"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Nabil R</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Altaf -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/altaf.jpg"
+            alt="Altaf"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Altaf</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Rendy -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/rendi.jpg"
+            alt="Rendy"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Rendy</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Ayza -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/ayza.jpg"
+            alt="Ayza"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Ayza</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Safa -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/safa.jpg"
+            alt="Safa"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Safa</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Arief -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/arief.jpg"
+            alt="Arief"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Arief</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Fairuz -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/fairuz.jpg"
+            alt="Fairuz"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Fairuz</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Alghi -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/alghi.jpg"
+            alt="Alghi"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Alghi</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Fauzan -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/ojan.jpg"
+            alt="Fauzan"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Fauzan</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Haris -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/haris.jpg"
+            alt="Haris"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Haris</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Tawaqal -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/tawaqal.jpg"
+            alt="Tawaqal"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Tawaqal</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+
+        <!-- Avandy -->
+        <div class="flex items-center bg-[#e5f5f9] rounded-xl shadow-lg p-4">
+          <img
+            src="foto_member/avandy.jpg"
+            alt="Avandy"
+            class="w-20 h-20 rounded-full mr-4 object-cover"
+          />
+          <div class="text-left">
+            <h3 class="text-xl font-bold text-gray-800">Avandy</h3>
+            <p class="text-gray-600">ANGGOTA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Struktur Organisasi -->
+    <section class="text-white py-12 sm:py-20 section">
+      <h2 class="text-center text-2xl sm:text-3xl font-semibold mb-8 sm:mb-16">
+        Struktur Kelas
+      </h2>
+
+      <div class="flex justify-center px-4">
+        <div class="relative max-w-full overflow-x-auto">
+          <div class="flex justify-center mb-4">
+            <div
+              class="bg-gradient-to-b from-[#f1fbfd] via-[#e5f5f9] to-[#d6eff6] border border-neutral-700 rounded-lg px-4 sm:px-8 py-3 sm:py-4 text-center hover:scale-105 transition-transform duration-300"
+            >
+              <p class="text-xs sm:text-sm text-neutral-800">Wali Kelas</p>
+              <p class="font-semibold text-neutral-600 text-sm sm:text-lg">
+                Buk Zakia
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-center">
+            <div class="w-px h-6 sm:h-10 bg-neutral-600"></div>
+          </div>
+
+          <div class="flex justify-center mb-4">
+            <div
+              class="bg-gradient-to-b from-[#f1fbfd] via-[#e5f5f9] to-[#d6eff6] border border-neutral-700 rounded-lg px-4 sm:px-8 py-3 sm:py-4 text-center hover:scale-105 transition-transform duration-300"
+            >
+              <p class="text-xs sm:text-sm text-neutral-800">Ketua Kelas</p>
+              <p class="font-semibold text-neutral-600 text-sm sm:text-lg">
+                Ailul
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-center">
+            <div class="w-px h-6 sm:h-10 bg-neutral-600"></div>
+          </div>
+
+          <div class="flex justify-center relative mb-4">
+            <div
+              class="absolute top-0 w-full max-w-[600px] h-px bg-neutral-600"
+            ></div>
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-12 pt-8">
+              <div
+                class="bg-gradient-to-b from-[#f1fbfd] via-[#e5f5f9] to-[#d6eff6] border border-neutral-700 rounded-lg px-4 sm:px-6 py-3 sm:py-4 text-center w-full sm:w-40 md:w-48 hover:scale-105 transition-transform duration-300"
+              >
+                <p class="text-xs sm:text-sm text-neutral-800">Wakil Ketua</p>
+                <p class="font-semibold text-neutral-600 text-sm">Zulfa</p>
+              </div>
+              <div
+                class="bg-gradient-to-b from-[#f1fbfd] via-[#e5f5f9] to-[#d6eff6] border border-neutral-700 rounded-lg px-4 sm:px-6 py-3 sm:py-4 text-center w-full sm:w-40 md:w-48 hover:scale-105 transition-transform duration-300"
+              >
+                <p class="text-xs sm:text-sm text-neutral-800">Sekretaris</p>
+                <p class="font-semibold text-neutral-600 text-sm">Sayyidah</p>
+              </div>
+              <div
+                class="bg-gradient-to-b from-[#f1fbfd] via-[#e5f5f9] to-[#d6eff6] border border-neutral-700 rounded-lg px-4 sm:px-6 py-3 sm:py-4 text-center w-full sm:w-40 md:w-48 hover:scale-105 transition-transform duration-300"
+              >
+                <p class="text-xs sm:text-sm text-neutral-800">Bendahara</p>
+                <p class="font-semibold text-neutral-600 text-sm">Keisya</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TENTANG SECTION -->
+    <section id="tentang" class="container mx-auto px-4 py-12 max-w-7xl">
+      <!-- Section RPL -->
+      <section class="flex flex-col md:flex-row items-center gap-8 mb-16 p-6">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AgiBHmLYhJq04ubxUwKccYosh1taGzU0PA&s"
+          alt="gambar rpl"
+          class="w-full md:w-1/2 max-w-md rounded-3xl shadow-xl hover:scale-105 transition-transform duration-300"
+        />
+        <div class="flex-1 text-left">
+          <h2 class="text-4xl md:text-5xl font-bold text-[#e5f5f9] mb-6">
+            APA ITU RPL?
+          </h2>
+          <p class="text-[#e5f5f9] text-lg md:text-xl leading-relaxed mb-6">
+            <strong>Rekayasa Perangkat Lunak (RPL)</strong> adalah salah satu
+            jurusan yang fokus pada
+            <mark class="bg-yellow-300 text-gray-900 px-1"
+              >pengembangan, desain, pemeliharaan, dan manajemen perangkat lunak
+              (software)</mark
+            >. Jurusan ini memberikan pengetahuan dan keterampilan yang
+            diperlukan untuk merancang, mengembangkan, dan mengelola sistem
+            perangkat lunak yang efisien dan andal.
+          </p>
+          <a
+            rel="noopener noreferrer"
+            href="https://kwikkiangie.ac.id/home/2023/09/19/rekayasa-perangkat-lunak-pengertian-contoh-dan-penerapannya/#:~:text=Rekayasa%20Perangkat%20Lunak%20atau%20biasa,manajemen%20organisasi%20dan%20manajemen%20kualitasnya."
+            target="_blank"
+            class="inline-block bg-[#ff6a3d] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#e55a2d] hover:scale-105 transition-all duration-300 shadow-lg"
+          >
+            Pelajari Selengkapnya
+          </a>
+        </div>
+      </section>
+
+      <!-- Section SMK 5 -->
+      <section
+        class="flex flex-col-reverse md:flex-row items-center gap-8 mb-16 p-6"
+      >
+        <div class="flex-1 text-left">
+          <h2 class="text-4xl md:text-5xl font-bold text-[#e5f5f9] mb-6">
+            SEKOLAH KAMI
+          </h2>
+          <p class="text-[#e5f5f9] text-lg md:text-xl leading-relaxed mb-6">
+            Kami sekolah di <strong>SMKN 5 TELKOM</strong> yang berada di Banda
+            Aceh, sekolah ini adalah sekolah IT yang memiliki 4 jurusan yang
+            berkaitan tentang IT yaitu TKJ, TJA, RPL, MM, dan kami sekelas
+            memilih jurusan RPL yang berfokus ke program yang berada di
+            software.
+          </p>
+          <a
+            rel="noopener noreferrer"
+            href="https://smkn5telkom.sch.id/"
+            target="_blank"
+            class="inline-block bg-[#ff6a3d] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#e55a2d] hover:scale-105 transition-all duration-300 shadow-lg"
+          >
+            Pelajari Selengkapnya
+          </a>
+        </div>
+        <img
+          src="medsos/smk5.png"
+          alt="gambar smkn 5"
+          class="w-48 h-48 md:w-64 md:h-64 rounded-full shadow-xl hover:scale-105 transition-transform duration-300 object-cover"
+        />
+      </section>
+
+      <!-- Section Programmer -->
+      <section class="flex flex-col md:flex-row items-center gap-8 mb-16 p-6">
+        <img
+          src="https://kazokku.com/blog/wp-content/uploads/2023/06/apa-itu-programmer.webp"
+          alt="gambar programmer"
+          class="w-full md:w-1/2 max-w-md rounded-3xl shadow-xl hover:scale-105 transition-transform duration-300"
+        />
+        <div class="flex-1 text-left">
+          <h2 class="text-4xl md:text-5xl font-bold text-[#e5f5f9] mb-6">
+            PENGERTIAN PROGRAMMER
+          </h2>
+          <p class="text-[#e5f5f9] text-lg md:text-xl leading-relaxed mb-6">
+            Programmer adalah seseorang yang memiliki keahlian dalam
+            <mark class="bg-yellow-300 text-gray-900 px-1"
+              >menulis, menguji, dan memelihara kode yang digunakan untuk
+              mengoperasikan perangkat lunak atau aplikasi komputer.</mark
+            >
+            Mereka menggunakan berbagai bahasa pemrograman seperti Python, Java,
+            C++, dan lainnya untuk mengembangkan program yang bisa digunakan
+            untuk berbagai tujuan, seperti aplikasi desktop, aplikasi web,
+            sistem operasi, game, dan banyak lagi.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-[#ff6a3d] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#e55a2d] hover:scale-105 transition-all duration-300 shadow-lg"
+          >
+            Pelajari Selengkapnya
+          </a>
+        </div>
+      </section>
+
+      <!-- Support Section -->
+      <section class="py-16">
+        <h2
+          class="text-4xl md:text-5xl font-bold text-[#e5f5f9] text-center mb-12"
+        >
+          Support By
+        </h2>
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center"
+        >
+          <div class="group">
+            <img
+              src="medsos/codhycal.png"
+              alt="coding by hycal"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-xl hover:scale-110 transition-transform duration-300 object-cover"
+            />
+            <p class="text-center text-[#e5f5f9] mt-3 text-sm md:text-base">
+              Coding by Hycal
+            </p>
+          </div>
+
+          <div class="group">
+            <img
+              src="medsos/rpl2.jpg"
+              alt="XI RPL 2"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-xl hover:scale-110 transition-transform duration-300 object-cover"
+            />
+            <p class="text-center text-[#e5f5f9] mt-3 text-sm md:text-base">
+              XI RPL 2
+            </p>
+          </div>
+
+          <div class="group">
+            <img
+              src="medsos/anraiba.png"
+              alt="Anraiba"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-xl hover:scale-110 transition-transform duration-300 object-cover"
+            />
+            <p class="text-center text-[#e5f5f9] mt-3 text-sm md:text-base">
+              Anraiba
+            </p>
+          </div>
+
+          <div class="group">
+            <img
+              src="medsos/nabzmed.jpg"
+              alt="Nabzmedia"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-xl hover:scale-110 transition-transform duration-300 object-cover"
+            />
+            <p class="text-center text-[#e5f5f9] mt-3 text-sm md:text-base">
+              Nabzmedia
+            </p>
+          </div>
+
+          <div class="group">
+            <img
+              src="medsos/ailuldes.jpg"
+              alt="Ailul Desain"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-xl hover:scale-110 transition-transform duration-300 object-cover"
+            />
+            <p class="text-center text-[#e5f5f9] mt-3 text-sm md:text-base">
+              Ailul Desain
+            </p>
+          </div>
+
+          <div class="group">
+            <img
+              src="medsos/aufades.jpg"
+              alt="aufa desain"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-xl hover:scale-110 transition-transform duration-300 object-cover"
+            />
+            <p class="text-center text-[#e5f5f9] mt-3 text-sm md:text-base">
+              Aufa Desain
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- GALERI SECTION -->
+    <section id="galeri" class="section">
+      <div class="container mx-auto px-4 py-12">
+        <h2
+          class="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#e5f5f9] mb-4"
+        >
+          Galeri Kelas XI RPL 2
+        </h2>
+        <p
+          class="text-center text-[#e5f5f9] text-base sm:text-lg mb-8 sm:mb-12"
+        >
+          Dokumentasi kegiatan dan momen berharga kelas kami
+        </p>
+      </div>   
+        <div class="container mx-auto px-4 pb-20">
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            >
+              <!-- Photo 1 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(0)"
+              >
+                <img
+                  src="foto_kelas/net1.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 1</p>
+                </div>
+              </div>
+      
+              <!-- Photo 2 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(1)"
+              >
+                <img
+                  src="foto_kelas/pot1.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 2</p>
+                </div>
+              </div>
+      
+              <!-- Photo 3 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(2)"
+              >
+                <img
+                  src="foto_kelas/pot2.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 3</p>
+                </div>
+              </div>
+      
+              <!-- Photo 4 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(3)"
+              >
+                <img
+                  src="foto_kelas/pot3.JPG"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 4</p>
+                </div>
+              </div>
+      
+              <!-- Photo 5 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(4)"
+              >
+                <img
+                  src="foto_kelas/pot4.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 5</p>
+                </div>
+              </div>
+      
+              <!-- Photo 6 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(5)"
+              >
+                <img
+                  src="foto_kelas/pot5.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 6</p>
+                </div>
+              </div>
+      
+              <!-- Photo 7 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(6)"
+              >
+                <img
+                  src="foto_kelas/pot6.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 7</p>
+                </div>
+              </div>
+      
+              <!-- Photo 8 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(7)"
+              >
+                <img
+                  src="foto_kelas/pot7.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 8</p>
+                </div>
+              </div>
+      
+              <!-- Photo 9 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(8)"
+              >
+                <img
+                  src="foto_kelas/pot8.JPG"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 9</p>
+                </div>
+              </div>
+      
+              <!-- Photo 10 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(9)"
+              >
+                <img
+                  src="foto_kelas/pot9.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 10</p>
+                </div>
+              </div>
+      
+              <!-- Photo 11 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(10)"
+              >
+                <img
+                  src="foto_kelas/pot10.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 11</p>
+                </div>
+              </div>
+      
+              <!-- Photo 12 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(11)"
+              >
+                <img
+                  src="foto_kelas/pot11.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 12</p>
+                </div>
+              </div>
+      
+              <!-- Photo 13 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(12)"
+              >
+                <img
+                  src="foto_kelas/pot12.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 13</p>
+                </div>
+              </div>
+      
+              <!-- Photo 14 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(13)"
+              >
+                <img
+                  src="foto_kelas/pot13.JPG"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 14</p>
+                </div>
+              </div>
+      
+              <!-- Photo 15 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(14)"
+              >
+                <img
+                  src="foto_kelas/pot14.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 15</p>
+                </div>
+              </div>
+      
+              <!-- Photo 16 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(15)"
+              >
+                <img
+                  src="foto_kelas/pot15.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 16</p>
+                </div>
+              </div>
+      
+              <!-- Photo 17 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(16)"
+              >
+                <img
+                  src="foto_kelas/pot16.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 17</p>
+                </div>
+              </div>
+      
+              <!-- Photo 18 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(17)"
+              >
+                <img
+                  src="foto_kelas/pot17.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 18</p>
+                </div>
+              </div>
+      
+              <!-- Photo 19 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(18)"
+              >
+                <img
+                  src="foto_kelas/pot18.JPG"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 19</p>
+                </div>
+              </div>
+      
+              <!-- Photo 20 -->
+              <div
+                class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onclick="openLightbox(19)"
+              >
+                <img
+                  src="foto_kelas/pot19.jpg"
+                  alt="XI RPL 2"
+                  class="w-full h-64 object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                >
+                  <p class="text-white p-4 font-semibold">Foto 20</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
+      <span class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</span>
+      <img id="lightbox-img" class="lightbox-content" src="" alt="" />
+      <span class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#1a2238] text-white text-center py-4 sm:py-6 mt-12">
+      <p class="text-sm sm:text-base">
+        &copy; 2023. <strong>XIRPL2</strong> SEKOLAH SMK NEGERI 5 TELKOM.
+      </p>
+    </footer>
+
+    <script>
+     const images = [
+        "foto_kelas/net1.jpg",
+        "foto_kelas/pot1.jpg",
+        "foto_kelas/pot2.jpg",
+        "foto_kelas/pot3.JPG",
+        "foto_kelas/pot4.jpg",
+        "foto_kelas/pot5.jpg",
+        "foto_kelas/pot6.jpg",
+        "foto_kelas/pot7.jpg",
+        "foto_kelas/pot8.JPG",
+        "foto_kelas/pot9.jpg",
+        "foto_kelas/pot10.jpg",
+        "foto_kelas/pot11.jpg",
+        "foto_kelas/pot12.jpg",
+        "foto_kelas/pot13.JPG",
+        "foto_kelas/pot14.jpg",
+        "foto_kelas/pot15.jpg",
+        "foto_kelas/pot16.jpg",
+        "foto_kelas/pot17.jpg",
+        "foto_kelas/pot18.JPG",
+        "foto_kelas/pot19.jpg",
+      ];
+
+      let currentIndex = 0;
+
+      function openLightbox(index) {
+        currentIndex = index;
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        lightboxImg.src = images[currentIndex];
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox(event) {
+        if (
+          event.target.id === "lightbox" ||
+          event.target.classList.contains("close-btn")
+        ) {
+          const lightbox = document.getElementById("lightbox");
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      }
+
+      function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) {
+          currentIndex = images.length - 1;
+        } else if (currentIndex >= images.length) {
+          currentIndex = 0;
+        }
+        document.getElementById("lightbox-img").src = images[currentIndex];
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        const lightbox = document.getElementById("lightbox");
+        if (lightbox.classList.contains("active")) {
+          if (e.key === "ArrowLeft") {
+            changeImage(-1);
+          } else if (e.key === "ArrowRight") {
+            changeImage(1);
+          } else if (e.key === "Escape") {
+            lightbox.classList.remove("active");
+            document.body.style.overflow = "auto";
+          }
+        }
+      });
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll(".section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
